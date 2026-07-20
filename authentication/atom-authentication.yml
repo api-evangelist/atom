@@ -1,0 +1,28 @@
+generated: '2026-07-18'
+method: searched
+source: https://soporte.atomchat.io/knowledge/api-de-clientes
+docs: https://soporte.atomchat.io/knowledge/api-de-clientes
+notes: >-
+  No OpenAPI is published for the Atom (atomchat.io) API, so this profile is
+  captured from the provider's knowledge base rather than derived from a spec.
+  The Atom Customers API and WhatsApp template-message API are called over HTTPS
+  and authenticated with an account API key generated in the Atom admin panel and
+  supplied on each HTTP request (documented via the knowledge-base articles on
+  configuring the key in Postman / HTTP requests). Header name and exact placement
+  are not published in the public docs and are intentionally left unspecified here
+  rather than guessed.
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+  oauth2_flows: []
+schemes:
+- name: apiKey
+  type: apiKey
+  in: header
+  description: >-
+    Account API key issued from the Atom admin panel, sent on each request to the
+    Atom Customers and WhatsApp template-message APIs.
+  sources:
+  - https://soporte.atomchat.io/knowledge/api-de-clientes
