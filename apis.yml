@@ -1,7 +1,26 @@
 aid: atom
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/atom.png
 name: ATOM
-description: ATOM is a company surfaced as a portfolio company of techstars and added to the API Evangelist
-  network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: Atom (atomchat.io) is a Panama-based conversational-commerce platform whose
+  multimodal AI Agents combine text, voice, image, and CRM data to run human-like WhatsApp
+  conversations that qualify leads and close sales for businesses across Latin America.
+  Founded in 2019 by Erick Holmann and Rene Mouynes and backed by Techstars and Mucker
+  Capital, Atom connects WhatsApp click-to-chat ads to an AI agent that engages and
+  qualifies prospects, then hands sales-ready leads to human reps. It exposes a Customers
+  API and a WhatsApp template-message API, both authenticated with an account API key
+  configured from the Atom admin panel.
 url: https://raw.githubusercontent.com/api-evangelist/atom/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -11,9 +30,18 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-18'
 tags:
 - Company
+- Messaging
+- WhatsApp
+- Artificial Intelligence
+- Conversational Commerce
+- Chatbots
+- Sales
+- Lead Generation
+- Customer Engagement
+- Latin America
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -23,3 +51,20 @@ maintainers:
 common:
 - type: Website
   url: https://atomchat.io/
+- type: Documentation
+  url: https://soporte.atomchat.io/knowledge/api-de-clientes
+- type: Support
+  url: https://soporte.atomchat.io/
+- type: Blog
+  url: https://atomchat.io/blog/
+- type: Authentication
+  url: authentication/atom-authentication.yml
+- type: DomainSecurity
+  url: security/atom-domain-security.yml
+- type: LLMsTxt
+  url: llms/atom-llms.txt
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

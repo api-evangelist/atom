@@ -1,0 +1,22 @@
+# Atom (atomchat.io)
+
+> Atom is a Panama-based conversational-commerce platform whose multimodal AI Agents combine text, voice, image, and CRM data to run human-like WhatsApp conversations that qualify leads and close sales for businesses across Latin America. Founded in 2019 by Erick Holmann and Rene Mouynes and backed by Techstars and Mucker Capital. Atom exposes a Customers API and a WhatsApp template-message API, both authenticated with an account API key from the Atom admin panel.
+
+## Company
+- [Atom website](https://atomchat.io/): Product marketing and overview (WhatsApp AI Agents for sales and lead generation).
+- [Automate sales on WhatsApp](https://atomchat.io/en/automate-sales-whatsapp/): Multimodal AI Agents for WhatsApp conversational commerce.
+- [Blog](https://atomchat.io/blog/): Product and conversational-commerce articles.
+
+## Docs
+- [Support / knowledge base](https://soporte.atomchat.io/): Atom help center and API knowledge base (Spanish).
+- [Customers API](https://soporte.atomchat.io/knowledge/api-de-clientes): How to use and configure the Atom Customers API.
+- [Send WhatsApp template messages via the API](https://soporte.atomchat.io/knowledge/como-enviar-templates-messages-utilizando-la-api-de-atomchat): Sending WhatsApp template messages through the Atom API.
+- [Testing the API in Postman](https://soporte.atomchat.io/knowledge/aprende-a-probar-tu-api-en-postman-y-configurarlas-en-las-peticiones-http-de-atom): Configuring API auth in Postman and HTTP requests.
+
+## Authentication
+- API key: Account API key generated in the Atom admin panel and sent on each HTTP request. No public OpenAPI is published.
+
+## API Evangelist artifacts
+- [Authentication profile](authentication/atom-authentication.yml)
+- [Domain security probe](security/atom-domain-security.yml)
+- [Well-known probe](well-known/atom-well-known.yml)
