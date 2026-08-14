@@ -30,7 +30,7 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-18'
+modified: '2026-08-14'
 tags:
 - Company
 - Messaging
@@ -42,7 +42,66 @@ tags:
 - Lead Generation
 - Customer Engagement
 - Latin America
-apis: []
+apis:
+- aid: atom:customers
+  name: Atom Customers API
+  description: >-
+    REST service for managing the customer (cliente) records behind Atom's
+    WhatsApp conversations. The provider knowledge base documents three
+    operations: create or update a customer, retrieve the list of all customers
+    with required and optional parameters, and retrieve a single customer's
+    details by ID. Requests are authenticated with an account bearer token
+    issued from the Atom admin panel and sent in the Authorization header. It is
+    the documented integration path for CRMs and in-house systems that have no
+    native Atom connector. No OpenAPI is published for this API.
+  humanURL: https://soporte.atomchat.io/knowledge/api-de-clientes
+  baseURL: https://us-central1-atomchat-io.cloudfunctions.net
+  tags:
+  - Customers
+  - CRM
+  - Messaging
+  - WhatsApp
+  properties:
+  - type: Documentation
+    url: https://soporte.atomchat.io/knowledge/api-de-clientes
+  - type: Authentication
+    url: authentication/atom-authentication.yml
+  - type: ErrorCatalog
+    url: errors/atom-problem-types.yml
+  - type: Conventions
+    url: conventions/atom-conventions.yml
+  - type: RateLimits
+    url: rate-limits/atom-rate-limits.yml
+- aid: atom:templates
+  name: Atom WhatsApp Templates API
+  description: >-
+    REST service for sending pre-approved WhatsApp template messages from an
+    account's official WhatsApp number. The documented send endpoint is
+    POST /api/Template/SendMessage, taking templateId, phoneNumber, clientName,
+    groupName, an assign flag and a params object of template variables; a
+    /templates endpoint exposes the account's templates. Requests carry
+    Content-type application/json and an Authorization Bearer token. When the
+    number is already in an open conversation the message is delivered
+    immediately, otherwise confirmation is awaited from the official WhatsApp
+    provider. No OpenAPI is published for this API.
+  humanURL: https://soporte.atomchat.io/knowledge/como-enviar-templates-messages-utilizando-la-api-de-atomchat
+  baseURL: https://us-central1-atomchat-io.cloudfunctions.net
+  tags:
+  - WhatsApp
+  - Messaging
+  - Templates
+  - Notifications
+  properties:
+  - type: Documentation
+    url: https://soporte.atomchat.io/knowledge/como-enviar-templates-messages-utilizando-la-api-de-atomchat
+  - type: Authentication
+    url: authentication/atom-authentication.yml
+  - type: ErrorCatalog
+    url: errors/atom-problem-types.yml
+  - type: Conventions
+    url: conventions/atom-conventions.yml
+  - type: RateLimits
+    url: rate-limits/atom-rate-limits.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -56,15 +115,96 @@ common:
 - type: Support
   url: https://soporte.atomchat.io/
 - type: Blog
-  url: https://atomchat.io/blog/
+  url: https://atomchat.io/blog
+- type: GettingStarted
+  url: https://soporte.atomchat.io/knowledge/aprende-a-probar-tu-api-en-postman-y-configurarlas-en-las-peticiones-http-de-atom
+- type: Pricing
+  url: https://atomchat.io/espanol/precio
+- type: Login
+  url: https://app.atomchat.io/
+- type: TermsOfService
+  url: https://atomchat.io/legal/terminos-y-condiciones
+- type: PrivacyPolicy
+  url: https://atomchat.io/legal/politica-de-privacidad
 - type: Authentication
   url: authentication/atom-authentication.yml
 - type: DomainSecurity
   url: security/atom-domain-security.yml
 - type: LLMsTxt
   url: llms/atom-llms.txt
+- type: Conventions
+  url: conventions/atom-conventions.yml
+- type: ErrorCatalog
+  url: errors/atom-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/atom-lifecycle.yml
+- type: Plans
+  url: plans/atom-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/atom-rate-limits.yml
+- type: Conformance
+  url: conformance/atom-conformance.yml
+- type: Webhooks
+  url: asyncapi/atom-webhooks.yml
+- type: Packages
+  url: packages/atom-packages.yml
+x-enrichment-notes:
+  unpointered_artifacts:
+  - file: well-known/atom-well-known.yml
+    reason: recorded absence, no pointer emitted (see below)
+  - file: mcp/atom-mcp.yml
+    reason: derived candidate only, no server exists (see below)
+  pointers_deliberately_withheld:
+  - type: WellKnown
+    reason: >-
+      Every /.well-known/* path 404s on atomchat.io and on the API host. The two
+      200s observed are an SPA catch-all (app.atomchat.io) and Intercom's own
+      security.txt on the help-centre host. Nothing is a document Atom
+      publishes, so the probe is recorded under a non-scoring type and no
+      WellKnown/SecurityTxt pointer is wired.
+  - type: MCPServer
+    reason: >-
+      mcp/atom-mcp.yml is a derived CANDIDATE with deployment.mode none. Atom
+      ships no MCP server, hosted or stdio; the only "AtomChat MCP server" found
+      is a third-party viaSocket wrapper.
+  - type: AgentCard
+    reason: >-
+      /.well-known/agent-card.json and /.well-known/agent.json 404 on every real
+      host. Never generated - search only.
+  - type: Idempotency
+    reason: >-
+      Atom documents no idempotency key or safe-retry contract on any surface,
+      including the WhatsApp template send.
+  - type: SDKs
+    reason: >-
+      Zero first-party client libraries in any public registry; packages
+      artifact records an honest zero.
+  - type: Security
+    reason: >-
+      No vulnerability-disclosure channel, no security contact and no bug bounty.
+      The published information security policy is an internal employee policy
+      last updated 2023-04-02.
+  - type: Compliance
+    reason: >-
+      Atom names no certification of its own. Firebase's ISO 27001 is Google's,
+      recorded as infrastructure context only.
+  - type: StatusPage
+    reason: status.atomchat.io does not resolve; /status returns 404.
+  - type: Deprecation
+    reason: No deprecation policy or Sunset header support published.
+  - type: ChangeLog
+    reason: >-
+      No API changelog. App-store release notes describe the Atom mobile app,
+      not the API.
 x-enrichment:
-  date: '2026-07-19'
-  status: backfilled
+  date: '2026-08-14'
+  status: enriched
+  artifacts_added: 9
+  artifacts_updated: 5
   pass: local-v1
-  note: backfilled from .gitignore signal + verified work evidence
+  note: >-
+    Two real APIs registered for the first time (Customers, WhatsApp Templates)
+    on the probe-confirmed base https://us-central1-atomchat-io.cloudfunctions.net.
+    Docs host soporte.atomchat.io answers 403 (Cloudflare bot challenge) to
+    direct fetches; its content was read through the search index and every
+    endpoint claim was then verified by live unauthenticated probe.
