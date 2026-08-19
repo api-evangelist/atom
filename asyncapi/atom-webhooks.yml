@@ -1,0 +1,52 @@
+generated: '2026-08-14'
+method: searched
+source: https://soporte.atomchat.io/knowledge/c%C3%B3mo-integrar-atom-con-crm-no-nativos-o-desarrollos-propios
+spec_type: none
+docs:
+- https://soporte.atomchat.io/knowledge/c%C3%B3mo-integrar-atom-con-crm-no-nativos-o-desarrollos-propios
+- https://soporte.atomchat.io/knowledge/integraciones-de-atom
+- https://soporte.atomchat.io/knowledge/como-conectar-web-forms-para-que-envien-un-template-message
+notes: >-
+  Atom publishes NO AsyncAPI document. It does publish a real webhook surface,
+  documented in the Spanish knowledge base as the integration path for CRMs that
+  have no native Atom connector (Zoho, Seekop, in-house systems). The direction
+  matters and is recorded precisely: Atom's documented webhook is INBOUND - an
+  external system calls an Atom webhook URL to trigger a predefined Atom flow.
+  No outbound event catalogue (message received, conversation assigned, lead
+  qualified) with subscribable event types and payload schemas was found in
+  public documentation. Event names, payload schemas and delivery/retry
+  semantics are not published, so none are recorded.
+direction: inbound
+webhooks:
+- name: flow-trigger
+  direction: inbound
+  description: >-
+    An external CRM/ERP calls a configured Atom webhook URL to execute a
+    predefined Atom flow (for example to start a WhatsApp conversation or send a
+    template when a record changes in the calling system).
+  configuration: >-
+    Created in the Atom flow editor by choosing the Webhook trigger option when
+    building a predefined flow; the caller configures the Atom webhook URL and
+    its parameters.
+  authentication:
+    required: true
+    type: api-token
+    note: >-
+      An API Token is mandatory for webhook-triggered flows, generated in
+      Configuracion > Mi Empresa > Configuraciones under the security settings.
+  payload_schema: null
+  source: https://soporte.atomchat.io/knowledge/c%C3%B3mo-integrar-atom-con-crm-no-nativos-o-desarrollos-propios
+outbound_events: []
+outbound_events_note: >-
+  None published. If Atom emits outbound events they are not documented in any
+  public article found on 2026-08-14.
+delivery:
+  retries: null
+  signature_verification: null
+  ordering: null
+  note: Not published.
+gaps:
+- No AsyncAPI 2.x/3.x document.
+- No outbound event catalogue or payload schemas.
+- No webhook signature/verification scheme documented.
+- No delivery/retry semantics documented.

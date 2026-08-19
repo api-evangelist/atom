@@ -1,0 +1,83 @@
+generated: '2026-08-14'
+method: searched
+source: https://atomchat.io/legal/acuerdo-de-nivel-de-servicio
+notes: >-
+  Atom publishes a real, signed Service Level Agreement as a legal page on its
+  own domain, with numeric uptime and support commitments. It publishes no
+  status page, no deprecation policy, no versioning policy and no API changelog.
+  Mobile release notes exist on the App Store / Google Play listings but describe
+  the Atom mobile app, not the API, so they are not recorded as an API changelog.
+versioning:
+  scheme: none-published
+  current: null
+  docs: null
+  note: >-
+    The documented endpoints (/templates, /clients, /api/Template/SendMessage)
+    carry no version segment or version header.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: >-
+    No deprecation policy, no RFC 8594 Sunset/Deprecation header support, and no
+    breaking-change notice period is published. No Deprecation pointer is wired.
+sla:
+  url: https://atomchat.io/legal/acuerdo-de-nivel-de-servicio
+  uptime_target: '99%'
+  measurement_window: monthly
+  exclusions: Justified Downtime (as defined in the agreement)
+  maintenance_window: maximum 10 hours per month, announced in advance
+  service_credits:
+  - availability: 99% - 95.01%
+    credit: 5%
+  - availability: 95% - 90.1%
+    credit: 10%
+  - availability: 90% - 85.01%
+    credit: 15%
+  - availability: below 85%
+    credit: 20%
+  support_response:
+    coverage_by_tier:
+      Starter: 8x5
+      Enterprise: 12x5
+    critical:
+      response: 2-12 hours depending on plan tier
+      resolution: 12-72 hours depending on plan tier
+    serious:
+      response: 4-24 hours depending on plan tier
+      resolution: 3-10 days depending on plan tier
+    minor:
+      response: 8-72 hours depending on plan tier
+      resolution: 5-30 days depending on plan tier
+status_page: null
+status_page_note: >-
+  status.atomchat.io does not resolve (DNS NXDOMAIN, probed 2026-08-14) and
+  https://atomchat.io/status returns 404. No third-party status page
+  (Statuspage/Instatus/Better Stack) was found. No StatusPage pointer is wired.
+changelog:
+  api_changelog: null
+  note: >-
+    No dated API changelog, release-notes page or /changelog route exists
+    (https://atomchat.io/changelog -> 404, probed 2026-08-14).
+deprecated_operations: []
+legal_documents:
+- name: Service Level Agreement
+  url: https://atomchat.io/legal/acuerdo-de-nivel-de-servicio
+- name: Terms and Conditions
+  url: https://atomchat.io/legal/terminos-y-condiciones
+- name: Subscription Terms
+  url: https://atomchat.io/legal/terminos-de-suscripcion
+- name: Privacy Policy
+  url: https://atomchat.io/legal/politica-de-privacidad
+- name: Information Security Policy
+  url: https://atomchat.io/legal/politica-de-seguridad-de-la-informacion
+  note: last updated 2023-04-02; internal-facing employee policy
+x-evidence:
+- url: https://atomchat.io/legal/acuerdo-de-nivel-de-servicio
+  status: 200
+- url: https://atomchat.io/status
+  status: 404
+- url: https://atomchat.io/changelog
+  status: 404
+- url: https://status.atomchat.io/
+  status: 0
+  note: DNS does not resolve

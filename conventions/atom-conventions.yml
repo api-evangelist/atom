@@ -1,0 +1,86 @@
+generated: '2026-08-14'
+method: searched
+source: https://soporte.atomchat.io/knowledge/api-de-clientes
+docs:
+- https://soporte.atomchat.io/knowledge/api-de-clientes
+- https://soporte.atomchat.io/knowledge/como-enviar-templates-messages-utilizando-la-api-de-atomchat
+- https://soporte.atomchat.io/knowledge/utiliza-la-api-de-plantillas
+- https://soporte.atomchat.io/knowledge/aprende-a-probar-tu-api-en-postman-y-configurarlas-en-las-peticiones-http-de-atom
+- https://soporte.atomchat.io/knowledge/c%C3%B3mo-integrar-atom-con-crm-no-nativos-o-desarrollos-propios
+notes: >-
+  Atom publishes no OpenAPI, no developer portal and no API-conventions page.
+  The runtime semantics below are what the Spanish-language Intercom knowledge
+  base states plus what live unauthenticated probes of
+  https://us-central1-atomchat-io.cloudfunctions.net confirmed on 2026-08-14.
+  Fields Atom does not publish are recorded as null rather than guessed - an
+  agent integrating with Atom cannot learn them from public material either,
+  which is the finding.
+authentication:
+  style: bearer-token
+  header: Authorization
+  format: 'Authorization: Bearer <public token>'
+  token_source: >-
+    Account API token generated in the Atom admin panel under
+    Configuracion > Mi Empresa > Configuraciones (security settings). The same
+    token authenticates webhook-triggered flows.
+  probe_evidence:
+    url: https://us-central1-atomchat-io.cloudfunctions.net/templates
+    http_status: 401
+    body_context_key: Authorization
+    body_context_label: headers.authorization
+    fetched: '2026-08-14'
+  scopes: null
+  rotation_policy: null
+content_negotiation:
+  request_content_type: application/json
+  charset: utf-8
+  documented_headers:
+  - Content-type: application/json
+  - Charset: utf-8
+  - Authorization: Bearer <public token>
+idempotency:
+  supported: false
+  header: null
+  note: >-
+    Atom documents no idempotency key, no de-duplication window and no safe-retry
+    contract on any API surface, including the WhatsApp template send endpoint
+    where a duplicate call means a duplicate message to a real person. No
+    Idempotency pointer is wired in apis.yml because there is nothing to point at.
+pagination:
+  style: null
+  note: >-
+    The Customers API is documented as accepting "mandatory and optional
+    parameters" on the list operation, but the knowledge base does not name the
+    pagination parameters or the response envelope fields. Not recorded rather
+    than guessed.
+filtering_and_expansion:
+  supported: null
+metadata:
+  supported: null
+request_tracing:
+  header: null
+  note: >-
+    Responses carry Google Cloud Functions infrastructure headers
+    (function-execution-id, x-cloud-trace-context) rather than a
+    provider-authored request-id. These are platform artefacts, not a
+    documented tracing contract.
+versioning:
+  scheme: none-published
+  note: >-
+    No version segment, header or date-based version appears in the documented
+    endpoints. /templates and /api/Template/SendMessage are both unversioned.
+  see: lifecycle/atom-lifecycle.yml
+error_envelope:
+  consistent: false
+  note: Two different envelopes observed on one host for the same failure.
+  see: errors/atom-problem-types.yml
+rate_limit_signaling:
+  headers: []
+  note: No RateLimit-*/X-RateLimit-*/Retry-After headers documented or observed.
+  see: rate-limits/atom-rate-limits.yml
+cross_links:
+  authentication: authentication/atom-authentication.yml
+  errors: errors/atom-problem-types.yml
+  lifecycle: lifecycle/atom-lifecycle.yml
+  rate_limits: rate-limits/atom-rate-limits.yml
+  webhooks: asyncapi/atom-webhooks.yml

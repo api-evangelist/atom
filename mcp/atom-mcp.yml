@@ -1,0 +1,97 @@
+generated: '2026-08-14'
+method: derived
+status: candidate
+source: >-
+  Derived from the operations Atom documents in its public knowledge base
+  (https://soporte.atomchat.io/knowledge/api-de-clientes and
+  .../como-enviar-templates-messages-utilizando-la-api-de-atomchat) and
+  confirmed live on the API host by unauthenticated probe, 2026-08-14
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: searched
+notes: >-
+  Atom ships NO MCP server. Searched the provider website, the Spanish knowledge
+  base, npm (@modelcontextprotocol and atomchat namespaces), and the public MCP
+  registries; nothing first-party exists, and mcp.atomchat.io does not resolve
+  (DNS NXDOMAIN, probed 2026-08-14). A third-party no-code platform (viaSocket)
+  advertises an "MCP server for AtomChat AI", but that is a vendor-built
+  wrapper, not an Atom-published surface, and it is deliberately NOT recorded as
+  Atom's. The tools below are a CANDIDATE list derived from the three
+  operations Atom genuinely documents; they describe what an MCP server for Atom
+  would expose, not something that exists. No MCPServer pointer is wired into
+  apis.yml, because that pointer asserts the provider serves an agent surface
+  and Atom does not. Input schemas are partial: Atom publishes no OpenAPI, so
+  parameter types and required/optional status cannot be established for the
+  Customers API without authenticated access.
+server:
+  name: atom
+  transport: null
+  url: null
+tools:
+- name: send_template_message
+  description: >-
+    Send a pre-approved WhatsApp template message from the account's official
+    WhatsApp number to a phone number, optionally creating/assigning the
+    conversation.
+  source_operation: POST https://us-central1-atomchat-io.cloudfunctions.net/api/Template/SendMessage
+  documented_input_fields:
+  - templateId
+  - phoneNumber
+  - clientName
+  - groupName
+  - assign
+  - params
+  input_schema: null
+  input_schema_note: >-
+    Field names are as documented by the provider; types, required/optional
+    status and the params object shape are not published.
+  probe:
+    url: https://us-central1-atomchat-io.cloudfunctions.net/api/Template/SendMessage
+    method: POST
+    http_status: 401
+    fetched: '2026-08-14'
+- name: list_templates
+  description: List the WhatsApp message templates available to the account.
+  source_operation: GET https://us-central1-atomchat-io.cloudfunctions.net/templates
+  documented_input_fields: []
+  input_schema: null
+  probe:
+    url: https://us-central1-atomchat-io.cloudfunctions.net/templates
+    method: GET
+    http_status: 401
+    fetched: '2026-08-14'
+- name: list_clients
+  description: Retrieve the list of customers in the Atom account.
+  source_operation: GET https://us-central1-atomchat-io.cloudfunctions.net/clients
+  documented_input_fields: []
+  input_schema: null
+  input_schema_note: >-
+    The knowledge base states the list operation accepts mandatory and optional
+    parameters but does not name them.
+  probe:
+    url: https://us-central1-atomchat-io.cloudfunctions.net/clients
+    method: GET
+    http_status: 401
+    fetched: '2026-08-14'
+- name: get_client
+  description: Retrieve a single customer's details by customer ID.
+  source_operation: >-
+    Customers API "obtener los datos de un cliente por su ID"
+    (exact path not published)
+  documented_input_fields:
+  - id
+  input_schema: null
+- name: upsert_client
+  description: Create or update a customer record in Atom.
+  source_operation: >-
+    Customers API "crear o actualizar un cliente"
+    (exact path not published)
+  documented_input_fields: []
+  input_schema: null
+  input_schema_note: >-
+    The knowledge base states required and optional parameters exist but the
+    field list is behind a Cloudflare bot challenge and was not readable.

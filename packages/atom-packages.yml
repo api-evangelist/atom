@@ -1,0 +1,56 @@
+generated: '2026-08-14'
+method: searched
+source: >-
+  Unauthenticated registry metadata probes (npm, PyPI, RubyGems, crates.io,
+  Packagist, NuGet, Maven Central) plus the Atom knowledge base and website,
+  2026-08-14
+package_count: 0
+official_sdk_count: 0
+notes: >-
+  Atom ships no first-party client library in any public package registry. Every
+  name probed returned 404 - npm (atomchat, atom-chat, atomchat-sdk,
+  atomchat-api, @atomchat/api, @atom-chat/sdk), PyPI, RubyGems, crates.io,
+  Packagist, NuGet, and Maven Central (g:io.atomchat, empty result set). No
+  SDK/CLI/SourceCode link exists in apis.yml to derive candidates from, and the
+  provider knowledge base documents integration by raw HTTP request and Postman
+  rather than by SDK. Two GitHub organisations with plausible names exist
+  (github.com/atomchat, github.com/atom-ai) but both have 0 public repositories
+  and no name, blog, location or description set, so neither can be attributed
+  to this company and neither is recorded as a source. No SDKs pointer is wired
+  in apis.yml because there is no SDK to point at.
+packages: []
+distribution_channels:
+- kind: mobile-app
+  name: AtomChat (Android)
+  url: https://play.google.com/store/apps/details?id=io.atomchat
+  identifier: io.atomchat
+  version: null
+  published: null
+  official: true
+  note: >-
+    End-user mobile application, not a developer client library. No registry
+    metadata endpoint; listed here so the absence of SDKs is not confused with
+    an absence of shipped software.
+- kind: mobile-app
+  name: AtomChat (iOS)
+  url: https://apps.apple.com/us/app/atomchat/id1632475954
+  identifier: '1632475954'
+  version: null
+  published: null
+  official: true
+  note: End-user mobile application, not a developer client library.
+registries_checked:
+- registry: npm
+  result: no first-party package
+- registry: pypi
+  result: no first-party package
+- registry: rubygems
+  result: no first-party package
+- registry: crates.io
+  result: no first-party package
+- registry: packagist
+  result: no first-party package
+- registry: nuget
+  result: no first-party package
+- registry: maven-central
+  result: no first-party package

@@ -1,11 +1,29 @@
-generated: '2026-07-18'
-method: searched
-source: live probe of https://atomchat.io/.well-known/*
-host: https://atomchat.io
+generated: '2026-08-14'
+method: probed
+source: >-
+  Live probes of /.well-known/* on every Atom host known to the profile,
+  2026-08-14
+hosts_probed:
+- https://atomchat.io
+- https://us-central1-atomchat-io.cloudfunctions.net
+- https://app.atomchat.io
+- https://soporte.atomchat.io
 notes: >-
-  No /.well-known/ discovery surface is published on atomchat.io. All standard
-  discovery documents returned 404. Recorded as honest negative results; no
-  canonical WellKnown/SecurityTxt pointer is wired because nothing was found.
+  Atom serves NO /.well-known discovery surface of its own. Every standard
+  document returns 404 on the marketing host (atomchat.io) and on the API host
+  (us-central1-atomchat-io.cloudfunctions.net). Two 200s were observed and BOTH
+  are false positives, recorded here explicitly so a later round does not credit
+  them: (1) app.atomchat.io answers HTTP 200 to every path, including
+  /openapi.json and /llms.txt, with the Angular SPA HTML shell (title "Atom",
+  data-beasties-container) - a catch-all route, not a document; (2)
+  soporte.atomchat.io serves a real text/plain security.txt, but it is
+  Intercom's, not Atom's - the body reads "Intercom - reporting security
+  vulnerabilities to Intercom", Contact: https://bugcrowd.com/intercom, and
+  Canonical: https://app.intercom.com/.well-known/security.txt. Atom's help
+  centre is a white-labelled Intercom deployment, so that document belongs to the
+  SaaS vendor. No WellKnown, SecurityTxt or Security pointer is wired in
+  apis.yml, because nothing here is a document Atom publishes.
+host: https://atomchat.io
 documents:
 - path: /.well-known/security.txt
   status: 404
@@ -13,7 +31,102 @@ documents:
   status: 404
 - path: /.well-known/oauth-authorization-server
   status: 404
+- path: /.well-known/oauth-protected-resource
+  status: 404
 - path: /.well-known/api-catalog
   status: 404
 - path: /.well-known/ai-plugin.json
   status: 404
+- path: /.well-known/agent-card.json
+  status: 404
+- path: /.well-known/agent.json
+  status: 404
+other_hosts:
+- host: https://us-central1-atomchat-io.cloudfunctions.net
+  note: the documented API host
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://app.atomchat.io
+  note: >-
+    Angular single-page app. SOFT 200 CATCH-ALL - every path below returned 200
+    with the same text/html SPA shell. Treated as a miss on all paths.
+  soft_200_catch_all: true
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    document: false
+    reason: HTML SPA shell
+  - path: /.well-known/openid-configuration
+    status: 200
+    document: false
+    reason: HTML SPA shell
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    document: false
+    reason: HTML SPA shell
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    document: false
+    reason: HTML SPA shell
+  - path: /.well-known/api-catalog
+    status: 200
+    document: false
+    reason: HTML SPA shell
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    document: false
+    reason: HTML SPA shell
+  - path: /.well-known/agent-card.json
+    status: 200
+    document: false
+    reason: HTML SPA shell - rejected as an agent card
+  - path: /.well-known/agent.json
+    status: 200
+    document: false
+    reason: HTML SPA shell - rejected as an agent card
+- host: https://soporte.atomchat.io
+  note: white-labelled Intercom help centre, fronted by Cloudflare bot management
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    document: true
+    belongs_to: Intercom
+    third_party: true
+    canonical: https://app.intercom.com/.well-known/security.txt
+    reason: >-
+      Real RFC 9116 document but published by the help-centre SaaS vendor, not
+      by Atom. Not credited to Atom and not saved to this repo.
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /robots.txt
+    status: 200
+    document: true
+    note: >-
+      Intercom help-centre robots.txt; declares
+      Sitemap: https://soporte.atomchat.io/sitemap.xml (which itself returns 403
+      to non-browser clients).

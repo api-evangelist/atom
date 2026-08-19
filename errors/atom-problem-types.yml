@@ -1,0 +1,96 @@
+generated: '2026-08-14'
+method: probed
+source: >-
+  Live unauthenticated probes of the Atom API host
+  https://us-central1-atomchat-io.cloudfunctions.net (2026-08-14), plus the
+  provider knowledge base at https://soporte.atomchat.io/knowledge/api-de-clientes
+format: proprietary
+notes: >-
+  Atom publishes no OpenAPI and no error reference page, so this catalogue is
+  built ONLY from error bodies observed on live unauthenticated requests to the
+  documented API host. Atom does NOT use RFC 9457 application/problem+json. Two
+  different error envelopes are in use on the same host, which is itself the
+  finding: /templates answers with a structured JSON envelope, while /clients
+  and /api/Template/SendMessage answer the same condition with a bare
+  text/plain string. No error taxonomy, no error codes, and no remediation
+  guidance are published. Nothing below is inferred - each row was observed.
+envelopes:
+- id: json-envelope
+  content_type: application/json; charset=utf-8
+  observed_on:
+  - https://us-central1-atomchat-io.cloudfunctions.net/templates
+  shape:
+    code: integer HTTP status repeated in the body
+    body.type: short error class string (e.g. Unauthorized)
+    body.message: human-readable message
+    body.path: array naming the offending request element
+    body.context.key: the header/parameter name at fault
+    body.context.label: dotted path to the offending element
+  example_observed: >-
+    {"body":{"context":{"key":"Authorization","label":"headers.authorization"},
+    "message":"No authorization token found","path":["headers.authorization"],
+    "type":"Unauthorized"},"code":401}
+- id: plain-text-envelope
+  content_type: text/html; charset=utf-8
+  observed_on:
+  - https://us-central1-atomchat-io.cloudfunctions.net/clients
+  - https://us-central1-atomchat-io.cloudfunctions.net/api/Template/SendMessage
+  shape: bare message string, no JSON, no code field
+  example_observed: 'No authorization token found.'
+- id: express-router-404
+  content_type: text/html; charset=utf-8
+  observed_on:
+  - https://us-central1-atomchat-io.cloudfunctions.net/api/Client
+  shape: default Express HTML error page ("Cannot GET /Client")
+  note: >-
+    Unrouted paths fall through to the framework default rather than a
+    provider-authored 404, leaking the Express stack (x-powered-by: Express)
+    and the internal route path.
+problems:
+- status: 401
+  type: Unauthorized
+  title: No authorization token found
+  detail: >-
+    The Authorization header was absent. The API expects
+    "Authorization: Bearer <public token>" per the provider knowledge base.
+  envelope: json-envelope
+  observed:
+    url: https://us-central1-atomchat-io.cloudfunctions.net/templates
+    method: GET
+    http_status: 401
+    fetched: '2026-08-14'
+- status: 401
+  type: Unauthorized
+  title: No authorization token found.
+  detail: Same condition as above, returned as plain text with no machine-readable code.
+  envelope: plain-text-envelope
+  observed:
+    url: https://us-central1-atomchat-io.cloudfunctions.net/clients
+    method: GET
+    http_status: 401
+    fetched: '2026-08-14'
+- status: 401
+  type: Unauthorized
+  title: No authorization token found.
+  detail: Template send endpoint rejects an unauthenticated POST.
+  envelope: plain-text-envelope
+  observed:
+    url: https://us-central1-atomchat-io.cloudfunctions.net/api/Template/SendMessage
+    method: POST
+    http_status: 401
+    fetched: '2026-08-14'
+- status: 404
+  type: NotFound
+  title: Cannot <METHOD> <path>
+  detail: Framework-default response for a path the router does not recognise.
+  envelope: express-router-404
+  observed:
+    url: https://us-central1-atomchat-io.cloudfunctions.net/api/Client
+    method: GET
+    http_status: 404
+    fetched: '2026-08-14'
+gaps:
+- No RFC 9457 problem+json.
+- No published error-code registry or error reference page.
+- Two inconsistent envelopes on one host for the identical failure condition.
+- No documented 4xx/5xx catalogue for success-path operations (auth-gated, unobservable).

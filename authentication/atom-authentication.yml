@@ -1,28 +1,82 @@
-generated: '2026-07-18'
+generated: '2026-08-14'
 method: searched
 source: https://soporte.atomchat.io/knowledge/api-de-clientes
 docs: https://soporte.atomchat.io/knowledge/api-de-clientes
+docs_additional:
+- https://soporte.atomchat.io/knowledge/como-enviar-templates-messages-utilizando-la-api-de-atomchat
+- https://soporte.atomchat.io/knowledge/utiliza-la-api-de-plantillas
+- https://soporte.atomchat.io/knowledge/aprende-a-probar-tu-api-en-postman-y-configurarlas-en-las-peticiones-http-de-atom
+- https://soporte.atomchat.io/knowledge/c%C3%B3mo-integrar-atom-con-crm-no-nativos-o-desarrollos-propios
 notes: >-
   No OpenAPI is published for the Atom (atomchat.io) API, so this profile is
-  captured from the provider's knowledge base rather than derived from a spec.
-  The Atom Customers API and WhatsApp template-message API are called over HTTPS
-  and authenticated with an account API key generated in the Atom admin panel and
-  supplied on each HTTP request (documented via the knowledge-base articles on
-  configuring the key in Postman / HTTP requests). Header name and exact placement
-  are not published in the public docs and are intentionally left unspecified here
-  rather than guessed.
+  captured from the provider's knowledge base and CONFIRMED by live
+  unauthenticated probes of the documented API host on 2026-08-14. The 2026-07
+  round left the header name unspecified rather than guessing it; that gap is
+  now closed with observed evidence. Atom authenticates with a static account
+  bearer token sent in the standard Authorization header:
+  "Authorization: Bearer <public token>". The token is generated in the Atom
+  admin panel (Configuracion > Mi Empresa > Configuraciones, security settings)
+  and the same token authenticates webhook-triggered flows. There is no OAuth 2
+  authorization server, no OpenID Connect discovery, no scopes, no token
+  expiry/refresh contract and no published rotation policy - all four
+  /.well-known auth-discovery paths return 404. The API also does NOT return a
+  WWW-Authenticate challenge on 401, which RFC 6750 requires.
 summary:
   types:
-  - apiKey
-  api_key_in:
-  - header
+  - http
+  api_key_in: []
+  http_schemes:
+  - bearer
   oauth2_flows: []
+  scopes_published: false
+  mtls: false
 schemes:
-- name: apiKey
-  type: apiKey
+- name: bearerAuth
+  type: http
+  scheme: bearer
   in: header
+  parameter_name: Authorization
+  format: 'Bearer <public token>'
   description: >-
-    Account API key issued from the Atom admin panel, sent on each request to the
-    Atom Customers and WhatsApp template-message APIs.
+    Static account API token issued from the Atom admin panel, sent on every
+    request to the Atom Customers API, the WhatsApp Templates API and
+    webhook-triggered flows. Scope is the whole account; Atom publishes no
+    per-scope or per-permission model.
+  token_management:
+    issued_from: Atom admin panel - Configuracion > Mi Empresa > Configuraciones
+    expiry: null
+    refresh: null
+    rotation_policy: null
   sources:
   - https://soporte.atomchat.io/knowledge/api-de-clientes
+  - https://soporte.atomchat.io/knowledge/como-enviar-templates-messages-utilizando-la-api-de-atomchat
+x-evidence:
+- url: https://us-central1-atomchat-io.cloudfunctions.net/templates
+  method: GET
+  http_status: 401
+  content_type: application/json; charset=utf-8
+  body: >-
+    {"body":{"context":{"key":"Authorization","label":"headers.authorization"},
+    "message":"No authorization token found","path":["headers.authorization"],
+    "type":"Unauthorized"},"code":401}
+  fetched: '2026-08-14'
+  note: names Authorization / headers.authorization as the required credential
+- url: https://us-central1-atomchat-io.cloudfunctions.net/clients
+  method: GET
+  http_status: 401
+  body: 'No authorization token found.'
+  fetched: '2026-08-14'
+- url: https://us-central1-atomchat-io.cloudfunctions.net/api/Template/SendMessage
+  method: POST
+  http_status: 401
+  body: 'No authorization token found.'
+  fetched: '2026-08-14'
+- url: https://atomchat.io/.well-known/openid-configuration
+  http_status: 404
+  fetched: '2026-08-14'
+- url: https://atomchat.io/.well-known/oauth-authorization-server
+  http_status: 404
+  fetched: '2026-08-14'
+- url: https://us-central1-atomchat-io.cloudfunctions.net/.well-known/oauth-protected-resource
+  http_status: 404
+  fetched: '2026-08-14'

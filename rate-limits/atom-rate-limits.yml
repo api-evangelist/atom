@@ -1,0 +1,44 @@
+generated: '2026-08-14'
+method: searched
+source: https://soporte.atomchat.io/knowledge/api-de-clientes
+docs:
+- https://soporte.atomchat.io/knowledge/api-de-clientes
+- https://soporte.atomchat.io/knowledge/como-enviar-templates-messages-utilizando-la-api-de-atomchat
+- https://soporte.atomchat.io/knowledge/limites-y-tipos-de-archivos-soportados
+limit_count: 0
+notes: >-
+  Atom publishes no API rate limits. The Customers API and the WhatsApp
+  Templates API articles in the provider knowledge base document headers, body
+  fields and auth but state no quota, no per-minute/per-hour ceiling, no burst
+  allowance and no 429 behaviour. The one "limits" page Atom does publish
+  (limites-y-tipos-de-archivos-soportados) covers attachment file sizes and
+  supported media types in the messaging product, not API request rates, so it
+  is not recorded as a rate limit. Live unauthenticated probes of the API host
+  on 2026-08-14 returned 401 with no RateLimit-*, X-RateLimit-* or Retry-After
+  headers on the response - only Google Cloud Functions infrastructure headers.
+  An honest zero: an integrator cannot learn Atom's throughput ceiling from any
+  public source.
+limits: []
+response_headers:
+  observed: []
+  documented: []
+  note: >-
+    Observed response headers on https://us-central1-atomchat-io.cloudfunctions.net/templates
+    were x-powered-by, vary, content-type, etag, function-execution-id,
+    x-cloud-trace-context, content-length, date, server, alt-svc. No rate-limit
+    signalling header of any kind.
+exhaustion_status_code: null
+retry_guidance: null
+upstream_limits:
+  note: >-
+    Atom is an official WhatsApp Business Solution Provider, so outbound
+    template throughput is ultimately bounded by Meta's WhatsApp Business
+    Platform messaging tiers. Those are Meta's limits, published by Meta, and
+    Atom does not restate them - recorded here as context, not as an Atom limit.
+x-evidence:
+- url: https://us-central1-atomchat-io.cloudfunctions.net/templates
+  status: 401
+  note: no rate-limit headers present on the response
+- url: https://soporte.atomchat.io/knowledge/api-de-clientes
+  status: 403
+  note: Cloudflare bot challenge to direct fetch; content read via search index

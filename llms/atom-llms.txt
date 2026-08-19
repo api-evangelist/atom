@@ -1,22 +1,52 @@
 # Atom (atomchat.io)
 
-> Atom is a Panama-based conversational-commerce platform whose multimodal AI Agents combine text, voice, image, and CRM data to run human-like WhatsApp conversations that qualify leads and close sales for businesses across Latin America. Founded in 2019 by Erick Holmann and Rene Mouynes and backed by Techstars and Mucker Capital. Atom exposes a Customers API and a WhatsApp template-message API, both authenticated with an account API key from the Atom admin panel.
+> Atom is a Panama-based conversational-commerce platform (ATOMCHAT, S.A., Panama City) whose multimodal AI Agents combine text, voice, image and CRM data to run human-like WhatsApp conversations that qualify leads and close sales across Latin America. Founded in 2019 by Erick Holmann and Rene Mouynes and backed by Techstars and Mucker Capital. Atom is an official WhatsApp Business Solution Provider. It exposes two documented REST APIs — a Customers API and a WhatsApp Templates API — both served from Google Cloud Functions at https://us-central1-atomchat-io.cloudfunctions.net and authenticated with a static account bearer token issued from the Atom admin panel. Atom publishes no OpenAPI, no AsyncAPI, no MCP server and no agent card.
 
-## Company
-- [Atom website](https://atomchat.io/): Product marketing and overview (WhatsApp AI Agents for sales and lead generation).
-- [Automate sales on WhatsApp](https://atomchat.io/en/automate-sales-whatsapp/): Multimodal AI Agents for WhatsApp conversational commerce.
-- [Blog](https://atomchat.io/blog/): Product and conversational-commerce articles.
-
-## Docs
-- [Support / knowledge base](https://soporte.atomchat.io/): Atom help center and API knowledge base (Spanish).
-- [Customers API](https://soporte.atomchat.io/knowledge/api-de-clientes): How to use and configure the Atom Customers API.
-- [Send WhatsApp template messages via the API](https://soporte.atomchat.io/knowledge/como-enviar-templates-messages-utilizando-la-api-de-atomchat): Sending WhatsApp template messages through the Atom API.
-- [Testing the API in Postman](https://soporte.atomchat.io/knowledge/aprende-a-probar-tu-api-en-postman-y-configurarlas-en-las-peticiones-http-de-atom): Configuring API auth in Postman and HTTP requests.
+## APIs
+- [Atom Customers API](https://soporte.atomchat.io/knowledge/api-de-clientes): Create or update a customer, list all customers, get a customer by ID. Base: https://us-central1-atomchat-io.cloudfunctions.net
+- [Atom WhatsApp Templates API](https://soporte.atomchat.io/knowledge/como-enviar-templates-messages-utilizando-la-api-de-atomchat): Send pre-approved WhatsApp template messages via POST /api/Template/SendMessage (templateId, phoneNumber, clientName, groupName, assign, params); list templates via /templates.
 
 ## Authentication
-- API key: Account API key generated in the Atom admin panel and sent on each HTTP request. No public OpenAPI is published.
+- Bearer token: `Authorization: Bearer <public token>`, plus `Content-type: application/json` and `Charset: utf-8`. The token is a static account API token generated in the Atom admin panel under Configuracion > Mi Empresa > Configuraciones (security settings), and the same token authenticates webhook-triggered flows.
+- No OAuth 2, no OpenID Connect, no scopes, no documented token expiry or rotation. All four /.well-known auth-discovery paths return 404.
+
+## Docs
+- [Help centre / knowledge base](https://soporte.atomchat.io/): Spanish-language Intercom help centre; the only API documentation Atom publishes.
+- [Test your API in Postman](https://soporte.atomchat.io/knowledge/aprende-a-probar-tu-api-en-postman-y-configurarlas-en-las-peticiones-http-de-atom): Configuring auth and HTTP requests.
+- [Integrate Atom with non-native CRMs or in-house systems](https://soporte.atomchat.io/knowledge/c%C3%B3mo-integrar-atom-con-crm-no-nativos-o-desarrollos-propios): REST + inbound webhook integration path.
+- [Use the Templates API](https://soporte.atomchat.io/knowledge/utiliza-la-api-de-plantillas)
+- [Atom integrations](https://soporte.atomchat.io/knowledge/integraciones-de-atom)
+
+## Company
+- [Website](https://atomchat.io/)
+- [Blog](https://atomchat.io/blog)
+- [Pricing](https://atomchat.io/espanol/precio): contact-sales only; no prices, tiers or quotas are published.
+- [Sign in](https://app.atomchat.io/)
+
+## Legal
+- [Service Level Agreement](https://atomchat.io/legal/acuerdo-de-nivel-de-servicio): 99% monthly uptime target, maintenance capped at 10 hours/month, 5–20% service credits, tiered support response times for Starter / Team / Professional / Enterprise.
+- [Terms and Conditions](https://atomchat.io/legal/terminos-y-condiciones)
+- [Subscription Terms](https://atomchat.io/legal/terminos-de-suscripcion)
+- [Privacy Policy](https://atomchat.io/legal/politica-de-privacidad)
+- [Information Security Policy](https://atomchat.io/legal/politica-de-seguridad-de-la-informacion): internal employee-facing policy, last updated 2 April 2023; names no certification, no security contact and no external disclosure channel.
+
+## What Atom does NOT publish
+- No OpenAPI/Swagger document on any host (probed /openapi.json, /openapi.yaml, /swagger.json, /v1/openapi.json, /api-docs, /docs, /redoc).
+- No GraphQL endpoint, no AsyncAPI document, no gRPC/protobuf.
+- No MCP server (mcp.atomchat.io does not resolve) and no A2A agent card.
+- No client SDK in npm, PyPI, RubyGems, crates.io, Packagist, NuGet or Maven Central.
+- No published API rate limits, no status page, no deprecation policy, no API changelog, no idempotency contract.
 
 ## API Evangelist artifacts
 - [Authentication profile](authentication/atom-authentication.yml)
+- [API conventions](conventions/atom-conventions.yml)
+- [Error catalogue](errors/atom-problem-types.yml)
+- [Lifecycle + SLA](lifecycle/atom-lifecycle.yml)
+- [Plans and pricing](plans/atom-plans-pricing.yml)
+- [Rate limits](rate-limits/atom-rate-limits.yml)
+- [Conformance](conformance/atom-conformance.yml)
+- [Webhook surface](asyncapi/atom-webhooks.yml)
+- [Packages](packages/atom-packages.yml)
+- [MCP candidate (no server exists)](mcp/atom-mcp.yml)
 - [Domain security probe](security/atom-domain-security.yml)
 - [Well-known probe](well-known/atom-well-known.yml)

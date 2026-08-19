@@ -1,0 +1,100 @@
+generated: '2026-08-14'
+method: derived
+source: >-
+  Derived from the Atom knowledge base, the provider's legal pages, and live
+  unauthenticated probes of https://us-central1-atomchat-io.cloudfunctions.net,
+  2026-08-14. No OpenAPI exists to derive from.
+notes: >-
+  Atom makes no published conformance or certification claim of its own. Its
+  information security policy (atomchat.io/legal/politica-de-seguridad-de-la-informacion,
+  last updated 2023-04-02) is an internal employee-facing policy: it mandates
+  incident reporting and TLS, but names no certification, no auditor, no
+  security contact and no external disclosure channel. Public material states
+  that Firebase - the underlying platform - holds ISO 27001; that is Google's
+  certification, not Atom's, and is recorded as infrastructure context only. No
+  Compliance pointer is wired in apis.yml.
+standards:
+- id: oauth2
+  conforms: false
+  evidence: >-
+    No OAuth 2.0 authorization server. /.well-known/oauth-authorization-server
+    and /.well-known/oauth-protected-resource returned 404 on atomchat.io and on
+    the API host. Auth is a static account bearer token.
+- id: oidc
+  conforms: false
+  evidence: /.well-known/openid-configuration returned 404 on every probed host.
+- id: rfc6750-bearer-token
+  conforms: true
+  evidence: >-
+    Authorization: Bearer <token> is the documented and probe-confirmed scheme;
+    the 401 response names headers.authorization as the offending element.
+    Note the API does NOT return a WWW-Authenticate challenge header, which
+    RFC 6750 requires on a 401.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    Error bodies are a proprietary {code, body:{type,message,path,context}}
+    envelope on /templates and bare text/plain elsewhere; content-type is never
+    application/problem+json. See errors/atom-problem-types.yml.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: >-
+    atomchat.io/.well-known/security.txt returns 404. soporte.atomchat.io does
+    serve a security.txt but it is Intercom's vendor document
+    (Canonical: https://app.intercom.com/.well-known/security.txt), not Atom's.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No deprecation policy or Sunset header support published.
+- id: openapi
+  conforms: false
+  evidence: >-
+    No OpenAPI/Swagger document found on any host after probing
+    /openapi.json, /openapi.yaml, /swagger.json, /v1/openapi.json, /api-docs,
+    /docs and /redoc across atomchat.io, api.atomchat.io, app.atomchat.io,
+    soporte.atomchat.io and us-central1-atomchat-io.cloudfunctions.net.
+- id: asyncapi
+  conforms: false
+  evidence: No AsyncAPI document; webhook surface is documented in prose only.
+- id: graphql
+  conforms: false
+  evidence: No /graphql surface found on any probed host.
+- id: mcp
+  conforms: false
+  evidence: No first-party MCP server; mcp.atomchat.io does not resolve.
+- id: a2a
+  conforms: false
+  evidence: >-
+    /.well-known/agent-card.json and /.well-known/agent.json returned 404 on
+    atomchat.io and on the API host. app.atomchat.io answers 200 for every
+    /.well-known/* path with the Angular SPA HTML shell, which is a catch-all,
+    not a document.
+- id: pagination
+  conforms: false
+  evidence: No pagination contract published for the Customers list operation.
+- id: idempotency
+  conforms: false
+  evidence: >-
+    No idempotency key on any surface, including the WhatsApp template send.
+    See conventions/atom-conventions.yml.
+- id: tls
+  conforms: true
+  evidence: >-
+    TLS 1.3 with HSTS (max-age 31536000) on atomchat.io; see
+    security/atom-domain-security.yml.
+certifications: []
+infrastructure_context:
+- provider: Google Cloud / Firebase
+  evidence: >-
+    API is served from Google Cloud Functions
+    (us-central1-atomchat-io.cloudfunctions.net, server: Google Frontend);
+    public Atom material states Firebase is used at the database level and is
+    ISO 27001 certified.
+  note: >-
+    A platform certification held by Google. NOT an Atom certification and not
+    counted as one.
+regulatory_context:
+- regime: WhatsApp Business Platform policy (Meta)
+  note: >-
+    Atom is an official WhatsApp Business Solution Provider, so its outbound
+    messaging is bound by Meta's template approval and 24-hour session-window
+    rules. Documented by Atom in prose; not a certification.

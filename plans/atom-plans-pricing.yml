@@ -1,0 +1,82 @@
+generated: '2026-08-14'
+method: searched
+source: https://atomchat.io/espanol/precio
+docs:
+- https://atomchat.io/espanol/precio
+- https://atomchat.io/english/pricing
+- https://atomchat.io/legal/acuerdo-de-nivel-de-servicio
+- https://atomchat.io/legal/terminos-de-suscripcion
+plan_count: 4
+pricing_model: contact-sales
+currency: null
+notes: >-
+  Atom's own pricing pages (/espanol/precio and /english/pricing, both HTTP 200,
+  fetched 2026-08-14) publish NO prices, NO tiers and NO quotas - the entire
+  page body is the heading "Precio" and a WhatsApp call-to-action, "Hablar con
+  un asesor". Pricing is therefore contact-sales only. The four tier NAMES below
+  are not invented: they are enumerated in Atom's own published Service Level
+  Agreement, which sets different support response and resolution times per
+  tier. Every price/quota field is null because Atom publishes none - not
+  because they were not looked for. No self-serve checkout, no published
+  overage rate, and no API-specific plan or metering are published anywhere.
+plans:
+- name: Starter
+  price: null
+  currency: null
+  billing_period: null
+  included_quota: null
+  overage: null
+  limits:
+    support_coverage: 8x5
+    critical_response: up to 12 hours
+    critical_resolution: up to 72 hours
+  source: https://atomchat.io/legal/acuerdo-de-nivel-de-servicio
+- name: Team
+  price: null
+  currency: null
+  billing_period: null
+  included_quota: null
+  overage: null
+  limits:
+    support_coverage: null
+    note: intermediate response/resolution band in the SLA table
+  source: https://atomchat.io/legal/acuerdo-de-nivel-de-servicio
+- name: Professional
+  price: null
+  currency: null
+  billing_period: null
+  included_quota: null
+  overage: null
+  limits:
+    support_coverage: null
+    note: intermediate response/resolution band in the SLA table
+  source: https://atomchat.io/legal/acuerdo-de-nivel-de-servicio
+- name: Enterprise
+  price: null
+  currency: null
+  billing_period: null
+  included_quota: null
+  overage: null
+  limits:
+    support_coverage: 12x5
+    critical_response: from 2 hours
+    critical_resolution: from 12 hours
+  source: https://atomchat.io/legal/acuerdo-de-nivel-de-servicio
+free_tier: null
+trial: null
+api_pricing:
+  metered: null
+  note: >-
+    No API-specific pricing, per-call price or included call volume is published.
+    WhatsApp conversation charges are set by Meta and are not restated by Atom
+    in any public page found.
+x-evidence:
+- url: https://atomchat.io/espanol/precio
+  status: 200
+  note: page body contains no prices or tiers
+- url: https://atomchat.io/english/pricing
+  status: 200
+  note: page body contains no prices or tiers
+- url: https://atomchat.io/legal/acuerdo-de-nivel-de-servicio
+  status: 200
+  note: names the four plan tiers in the support matrix
