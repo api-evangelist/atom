@@ -90,6 +90,11 @@ apis:
   - WhatsApp
   - Messaging
   - Templates
+  - Notification
+  tags_raw:
+  - WhatsApp
+  - Messaging
+  - Templates
   - Notifications
   properties:
   - type: Documentation
