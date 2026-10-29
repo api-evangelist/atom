@@ -64,6 +64,110 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-ATOM is a company surfaced as a portfolio company of techstars and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+Atom (atomchat.io) is a Panama-based conversational-commerce platform whose multimodal AI Agents combine text, voice, image, and CRM data to run human-like WhatsApp conversations that qualify leads and close sales for businesses across Latin America. Founded in 2019 by Erick Holmann and Rene Mouynes and backed by Techstars and Mucker Capital, Atom connects WhatsApp click-to-chat ads to an AI agent that engages and qualifies prospects, then hands sales-ready leads to human reps. It exposes a Customers API and a WhatsApp template-message API, both authenticated with an account API key configured from the Atom admin panel.
 
-Backed by: techstars — https://atomchat.io/
+**Areas:** Company · Messaging · WhatsApp · Artificial Intelligence · Conversational Commerce · Chatbots · Sales · Lead Generation · Customer Engagement · Latin America
+
+## ATOM on APIs.io
+
+Everything profiled for ATOM is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/atom/](https://apis.io/providers/atom/)** — or go straight to one of the APIs or properties below.
+
+### APIs (2)
+
+- [Atom Customers API](https://apis.io/apis/atom/customers/) — REST service for managing the customer (cliente) records behind Atom's WhatsApp conversations. The provider knowledge base documents three operations:…
+- [Atom WhatsApp Templates API](https://apis.io/apis/atom/templates/) — REST service for sending pre-approved WhatsApp template messages from an account's official WhatsApp number. The documented send endpoint is POST…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Atom Webhooks](https://apis.io/asyncapis/atom/atom-webhooks/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Atom Authentication](https://apis.io/security/atom/atom-authentication/)
+- [Atom Domain Security](https://apis.io/security/atom/atom-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Atom Plans Pricing](https://apis.io/plans/atom/atom-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Atom Rate Limits](https://apis.io/rate-limits/atom/atom-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://atomchat.io/)
+- [Documentation](https://soporte.atomchat.io/knowledge/api-de-clientes)
+- [Getting started](https://soporte.atomchat.io/knowledge/aprende-a-probar-tu-api-en-postman-y-configurarlas-en-las-peticiones-http-de-atom)
+- [Pricing](https://atomchat.io/espanol/precio)
+- [Support](https://soporte.atomchat.io/)
+- [Blog](https://atomchat.io/blog)
+- [Terms of service](https://atomchat.io/legal/terminos-y-condiciones)
+- [Privacy policy](https://atomchat.io/legal/politica-de-privacidad)
+
+## API Evangelist rating
+
+**Kin Score 37.1** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 39.0 |
+| Contract governance | 4.5 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 19.0 |
+| Access clarity | 69.7 |
+
+**Agent readiness 25.2** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 22.7** — AI & Biometrics
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/atom/](https://apis.io/providers/atom/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for ATOM: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/atom/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
